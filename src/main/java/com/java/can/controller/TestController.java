@@ -1,7 +1,6 @@
 package com.java.can.controller;
 
 import com.java.can.config.CanChannelServer;
-import com.java.can.pro.Can2Protocol;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +25,8 @@ public class TestController {
             // int id, byte flags, byte[] data
             byte[] data = new byte[8];
             data[0] = 0X01;
-            CanFrame canFrame = CanFrame.create(Can2Protocol.GET_VERSION, (byte) 0,data );
+            int canId = 0X02;
+            CanFrame canFrame = CanFrame.create(canId, (byte) 0,data );
             CanChannelServer.channel.write(canFrame);
             return "发送成功";
         }
